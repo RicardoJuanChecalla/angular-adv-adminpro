@@ -18,7 +18,7 @@ export class Graph1Component {
   legend3: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
   legend4: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
 
-  data1: number[] = [350, 450, 100];
+  data1: number[] = [250, 600, 50];
   data2: number[] = [350, 450, 100];
   data3: number[] = [350, 450, 100];
   data4: number[] = [350, 450, 100];

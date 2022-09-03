@@ -9,7 +9,7 @@ import { ChartData, ChartEvent, ChartType } from 'chart.js';
 })
 export class DoughnutComponent {
   @Input() title: string = "";
-  @Input() legend: string[] = ['', '', ''];
+  @Input() legend: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
   @Input() data: number[] = [350, 450, 100];
   // Doughnut
   // public doughnutChartLabels: string[] = [ 'Download Sales', 'In-Store Sales', 'Mail-Order Sales' ];
