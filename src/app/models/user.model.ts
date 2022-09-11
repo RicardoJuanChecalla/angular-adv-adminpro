@@ -7,7 +7,17 @@ export class User {
         public image?: string,
         public role?: string,
         public google?: boolean,
-    ){
+    ){}
 
+    get imageUrl(){
+        return this.image;
+    }
+
+    set updateImageUrl(image: string){
+        this.image = image;
+    }
+
+    printUser(){
+        console.log(this.name);
     }
 }

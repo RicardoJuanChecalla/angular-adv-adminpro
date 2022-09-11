@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 declare const google: any; 
@@ -12,7 +13,11 @@ declare const google: any;
 
 export class HeaderComponent implements OnInit {
 
-  constructor( private userService: UserService, private router: Router ) { }
+  public user!: User;
+
+  constructor( private userService: UserService, private router: Router ) { 
+    this.user = userService.user;
+  }
 
   ngOnInit(): void {
   }
@@ -22,7 +27,7 @@ export class HeaderComponent implements OnInit {
     google.accounts.id.revoke('ricardie777@gmail.com', ()=>{
       this.router.navigateByUrl('/login');
     });
-    // this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/login');
   }
 
 }
