@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { LoadUser } from '../interfaces/load-users.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { User } from '../models/user.model';
@@ -24,6 +25,14 @@ export class UserService {
     return this.user.uid || '';
   }
 
+  get headers(){
+    return{ 
+      headers: { 
+        'x-token': this.token 
+      }
+    }
+  }
+
   createUser(formData: any){
     return this.http.post(`${base_url}/users`, formData)
       .pipe(
@@ -38,7 +47,7 @@ export class UserService {
       ...data,
       role: this.user.role || ''
     }
-    return this.http.put(`${base_url}/users/${this.uid}`, data, { headers: { 'x-token': this.token }});
+    return this.http.put(`${base_url}/users/${this.uid}`, data, this.headers);
   }
 
   login(formData: any){
@@ -60,7 +69,7 @@ export class UserService {
   }
 
   validateToken(): Observable<boolean> {
-    return this.http.get(`${base_url}/login/renew`, { headers: { 'x-token': this.token }})
+    return this.http.get(`${base_url}/login/renew`, this.headers)
     .pipe(
       map( (resp: any) =>{
         const { name, email, uid, image, role, google } = resp.user;
@@ -85,12 +94,33 @@ export class UserService {
     localStorage.removeItem('token');
   }
 
-  getImageUrl(type: string, image: string): Observable<string>{
-    const token = localStorage.getItem('token') || '';
-    return this.http.get(`${base_url}/upload/${type}/${image}`, { headers: { 'x-token': token }})
-      .pipe(
-        tap((resp: any)=> console.log(resp))
-      );
+  getImageUrl(type: 'users'|'doctors'|'hospitals', image: string){
+    return this.http.get(`${base_url}/upload/${type}/${image}`, this.headers);
+  }
+
+  loadUsers(from: number = 0){
+
+    return this.http.get<LoadUser>(`${base_url}/users?from=${from}`, this.headers)
+    .pipe(
+      map( resp => {
+        const users = resp.users.map( 
+          user => new User(user.name, user.email, '', 
+            user.uid, '../../../assets/images/users/no-image.jpg', user.role, user.google)  
+        );
+        return {
+          total: resp.total,
+          users
+        };
+      })
+    )
+  }
+
+  deleteUser(uid: string){
+    return this.http.delete(`${base_url}/users/${uid}`, this.headers);
+  }
+
+  updateUser(user: User){
+    return this.http.put(`${base_url}/users/${user.uid}`, user, this.headers);
   }
 
 }

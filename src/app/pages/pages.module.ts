@@ -14,6 +14,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserComponent } from './maintenances/user/user.component';
+import { DoctorComponent } from './maintenances/doctor/doctor.component';
+import { HospitalComponent } from './maintenances/hospital/hospital.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { ProfileComponent } from './profile/profile.component';
     AccountSettingsComponent,
     PromisesComponent,
     RxjsComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserComponent,
+    DoctorComponent,
+    HospitalComponent
   ],
   exports: [
     DashboradComponent,

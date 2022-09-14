@@ -11,6 +11,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserComponent } from './maintenances/user/user.component';
+import { HospitalComponent } from './maintenances/hospital/hospital.component';
+import { DoctorComponent } from './maintenances/doctor/doctor.component';
 
 const routes: Routes = [
     { 
@@ -25,6 +28,10 @@ const routes: Routes = [
         { path: 'promise', component: PromisesComponent, data:{ titulo: 'Promises' } },
         { path: 'rxjs', component: RxjsComponent, data:{ titulo: 'Rxjs' } },
         { path: 'profile', component: ProfileComponent, data:{ titulo: 'User profile' } },
+
+        { path: 'users', component: UserComponent, data:{ titulo: 'Users' } },
+        { path: 'hospitals', component: HospitalComponent, data:{ titulo: 'Hospitals' } },
+        { path: 'doctors', component: DoctorComponent, data:{ titulo: 'Doctors' } },
         // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     ]
     },
