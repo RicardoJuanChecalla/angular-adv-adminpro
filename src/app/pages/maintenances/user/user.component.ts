@@ -65,7 +65,7 @@ export class UserComponent implements OnInit, OnDestroy {
     if(term.length<=2){
       this.users = this.usersTemp;
     }else {
-      this.searchService.search('users',term)
+      this.searchService.searchByUser(term)
       .subscribe({
         next: (result: User[]) => { this.users = result },
         error: (e) => { Swal.fire('Error',e.error.msg, 'error') },

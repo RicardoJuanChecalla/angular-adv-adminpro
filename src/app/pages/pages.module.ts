@@ -17,6 +17,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserComponent } from './maintenances/user/user.component';
 import { DoctorComponent } from './maintenances/doctor/doctor.component';
 import { HospitalComponent } from './maintenances/hospital/hospital.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { DoctorByIdComponent } from './maintenances/doctor/doctor-by-id.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { HospitalComponent } from './maintenances/hospital/hospital.component';
     ProfileComponent,
     UserComponent,
     DoctorComponent,
-    HospitalComponent
+    HospitalComponent,
+    DoctorByIdComponent
   ],
   exports: [
     DashboradComponent,
@@ -44,7 +47,8 @@ import { HospitalComponent } from './maintenances/hospital/hospital.component';
     SharedModule,
     RouterModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule,
   ]
 })
 export class PagesModule { }

@@ -35,12 +35,12 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Avatar</th>
+                                <th class="w100">Avatar</th>
                                 <th>Correo</th>
                                 <th>Nombre</th>
                                 <th>Role</th>
                                 <th>Auth</th>
-                                <th class="text-nowrap">Acciones</th>
+                                <th class="w100 text-nowrap">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
