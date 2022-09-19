@@ -69,6 +69,10 @@ export class SearchsService {
     );
   }
 
+  searchAll(term: string){
+    return this.http.get(`${base_url}/search/${term}`, this.headers);
+  }
+
 
   // search(type: 'users'|'doctors'|'hospitals', term: string): Observable<User[] | Hospital[] | Doctor[]> {
   //   return this.http.get<any[]>(`${base_url}/search/collection/${type}/${term}`, this.headers)

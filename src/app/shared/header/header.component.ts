@@ -15,7 +15,8 @@ export class HeaderComponent implements OnInit {
 
   public user!: User;
 
-  constructor( private userService: UserService, private router: Router ) { 
+  constructor( private userService: UserService, 
+      private router: Router ) { 
     this.user = userService.user;
   }
 
@@ -28,6 +29,13 @@ export class HeaderComponent implements OnInit {
       this.router.navigateByUrl('/login');
     });
     this.router.navigateByUrl('/login');
+  }
+
+  search(term: string){
+    if(term.length===0){
+      this.router.navigateByUrl(`/dashboard`);
+    }
+    this.router.navigateByUrl(`/dashboard/search/${term}`);
   }
 
 }

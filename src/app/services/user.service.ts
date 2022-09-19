@@ -25,6 +25,10 @@ export class UserService {
     return this.user.uid || '';
   }
 
+  get role(): 'USER_ROLE' | 'ADMIN_ROLE' {
+    return this.user.role!;
+  }
+
   get headers(){
     return{ 
       headers: { 
@@ -33,11 +37,18 @@ export class UserService {
     }
   }
 
+  saveLocalStorage(token: string, menu: any){
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify( menu ));
+  }
+
   createUser(formData: any){
     return this.http.post(`${base_url}/users`, formData)
       .pipe(
         tap( (resp: any) =>{
-          localStorage.setItem('token', resp.token);
+          // localStorage.setItem('token', resp.token);
+          // localStorage.setItem('menu', resp.menu);
+          this.saveLocalStorage(resp.token,resp.menu);
         } )
       );
   }
@@ -54,7 +65,9 @@ export class UserService {
     return this.http.post(`${base_url}/login`, formData)
       .pipe(
         tap( (resp: any) =>{
-          localStorage.setItem('token', resp.token);
+          // localStorage.setItem('token', resp.token);
+          // localStorage.setItem('menu', resp.menu);
+          this.saveLocalStorage(resp.token, resp.menu);
         } )
       );
   }
@@ -63,7 +76,9 @@ export class UserService {
     return this.http.post(`${base_url}/login/google`, {token})
       .pipe(
         tap( (resp: any) =>{
-          localStorage.setItem('token', resp.token);
+          // localStorage.setItem('token', resp.token);
+          // localStorage.setItem('menu', resp.menu);
+          this.saveLocalStorage(resp.token,resp.menu);
         } )
       );
   }
@@ -74,7 +89,9 @@ export class UserService {
       map( (resp: any) =>{
         const { name, email, uid, image, role, google } = resp.user;
         this.user = new User(name, email, '', uid, '../../../assets/images/users/no-image.jpg', role, google);
-        localStorage.setItem('token', resp.token);
+        // localStorage.setItem('token', resp.token);
+        // localStorage.setItem('menu', resp.menu);
+        this.saveLocalStorage(resp.token,resp.menu);
         return true;
         }),
       catchError( () => of(false))
@@ -92,6 +109,7 @@ export class UserService {
 
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
   }
 
   getImageUrl(type: 'users'|'doctors'|'hospitals', image: string){
